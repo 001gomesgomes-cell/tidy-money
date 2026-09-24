@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tidy Money — Budget Dashboard for Google Sheets &amp; Excel</title>
+  <meta name="description" content="A budget spreadsheet for Google Sheets and Excel that does the math for you. Dashboard, monthly budget, transactions, savings goals, debt payoff and net worth in one calm file. One-time $12, instant download.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tidy Money — Budget Dashboard">
+  <meta property="og:description" content="See exactly where your money goes — in one calm dashboard. A budget spreadsheet for Google Sheets &amp; Excel. One-time $12, instant download.">
+  <meta name="theme-color" content="#FAF7F2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+  <!-- META PIXEL -->
+  <style>
+    :root {
+      --cream: #FAF7F2;
+      --cream-2: #F3EEE5;
+      --ink: #1F3D2B;
+      --ink-2: #2C5039;
+      --sage: #7FA98B;
+      --sage-soft: #DCE8DF;
+      --sage-line: #C9DACD;
+      --mustard: #E3B23C;
+      --mustard-soft: #F7EBCB;
+      --text: #1B1B1B;
+      --muted: #5C6660;
+      --white: #FFFFFF;
+      --line: #E6E0D5;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --shadow: 0 10px 30px rgba(31, 61, 43, 0.08), 0 1px 3px rgba(31, 61, 43, 0.06);
+      --shadow-sm: 0 4px 14px rgba(31, 61, 43, 0.06);
+      --font: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --max: 1080px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--text);
+      background: var(--cream);
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: var(--ink); }
+    h1, h2, h3, h4 { color: var(--ink); line-height: 1.15; margin: 0 0 0.5em; letter-spacing: -0.01em; }
+    h1 { font-size: clamp(2rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -0.025em; }
+    h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 700; }
+    h3 { font-size: 1.1rem; font-weight: 600; }
+    p { margin: 0 0 1em; }
+    .muted { color: var(--muted); }
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    section { padding: 64px 0; }
+    .section-head { max-width: 640px; margin: 0 auto 40px; text-align: center; }
+    .section-head p { color: var(--muted); font-size: 1.05rem; }
+    .eyebrow {
+      display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--ink-2); background: var(--sage-soft);
+      padding: 6px 12px; border-radius: 999px; margin-bottom: 14px;
+    }
+
+    :focus-visible { outline: 3px solid var(--mustard); outline-offset: 3px; border-radius: 6px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      font-family: inherit; font-weight: 600; font-size: 1rem; line-height: 1;
+      padding: 16px 26px; border-radius: 999px; text-decoration: none;
+      background: var(--ink); color: var(--white); border: 2px solid var(--ink);
+      transition: background .18s ease, transform .18s ease, box-shadow .18s ease;
+      box-shadow: 0 6px 18px rgba(31, 61, 43, 0.18);
+    }
+    .btn:hover { background: var(--ink-2); border-color: var(--ink-2); transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-sm { padding: 10px 16px; font-size: 0.9rem; box-shadow: none; }
+    .btn-lg { padding: 18px 32px; font-size: 1.08rem; }
+    .btn svg { width: 18px; height: 18px; flex: none; }
+
+    /* Header */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250, 247, 242, 0.88);
+      -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .wordmark {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
+    }
+    .wordmark .mark { width: 30px; height: 30px; border-radius: 9px; background: var(--ink); display: grid; place-items: center; }
+    .wordmark .mark svg { width: 18px; height: 18px; }
+
+    /* Hero */
+    .hero { padding: 64px 0 32px; text-align: center; }
+    .hero .wrap { max-width: 760px; }
+    .hero p.sub { font-size: clamp(1.05rem, 2.4vw, 1.3rem); color: var(--muted); margin: 18px auto 30px; max-width: 600px; }
+    .hero .meta { margin-top: 18px; font-size: 0.92rem; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 10px; }
+    .hero .meta span::after { content: "·"; margin-left: 10px; color: var(--sage); }
+    .hero .meta span:last-child::after { content: none; }
+
+    /* Dashboard mock */
+    .mock-section { padding: 24px 0 72px; }
+    .mock {
+      position: relative; background: var(--white); border-radius: 24px; box-shadow: var(--shadow);
+      border: 1px solid var(--line); padding: 20px; overflow: hidden;
+    }
+    .mock-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+    .mock-title { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--ink); font-size: 0.95rem; }
+    .mock-tabs { display: none; gap: 6px; }
+    .mock-tabs span { font-size: 0.72rem; padding: 5px 10px; border-radius: 999px; background: var(--cream-2); color: var(--muted); }
+    .mock-tabs span.on { background: var(--ink); color: var(--white); }
+    .badge-example {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      color: #6B5312; background: var(--mustard-soft); border: 1px solid #EBD69A;
+      padding: 5px 10px; border-radius: 999px; white-space: nowrap;
+    }
+    .tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 18px; }
+    .tile { background: var(--cream); border-radius: var(--radius-sm); padding: 14px 16px; border: 1px solid var(--line); }
+    .tile .label { font-size: 0.78rem; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+    .tile .value { font-size: 1.45rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+    .tile.accent { background: var(--sage-soft); border-color: var(--sage-line); }
+    .tile.gold { background: var(--mustard-soft); border-color: #EBD69A; }
+    .tile .value small { font-size: 0.85rem; font-weight: 500; color: var(--muted); margin-left: 4px; }
+
+    .chart { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 16px; }
+    .chart-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+    .chart-head h3 { margin: 0; font-size: 0.95rem; }
+    .legend { display: flex; gap: 14px; font-size: 0.78rem; color: var(--muted); }
+    .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+    .legend .planned { background: var(--sage-soft); border: 1px solid var(--sage); }
+    .legend .actual { background: var(--ink); }
+    .rows { display: grid; gap: 10px; }
+    .row { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 10px; font-size: 0.82rem; }
+    .row .cat { color: var(--text); font-weight: 500; }
+    .bars { position: relative; height: 22px; }
+    .bar { position: absolute; left: 0; top: 0; height: 100%; border-radius: 6px; }
+    .bar.planned { background: var(--sage-soft); border: 1px solid var(--sage); }
+    .bar.actual { top: 5px; height: 12px; background: var(--ink); border-radius: 4px; }
+    .bar.actual.over { background: var(--mustard); }
+    .row .amt { position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-left: 6px; }
+    .chart-note { margin: 12px 0 0; font-size: 0.76rem; color: var(--muted); }
+    .chart-note i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; background: var(--mustard); margin-right: 6px; vertical-align: -1px; }
+
+    /* Grids and cards */
+    .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    .card {
+      background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 24px; box-shadow: var(--shadow-sm);
+    }
+    .card h3 { margin-top: 12px; }
+    .card p { margin: 0; color: var(--muted); font-size: 0.97rem; }
+    .icon {
+      width: 44px; height: 44px; border-radius: 12px; background: var(--sage-soft);
+      display: grid; place-items: center; color: var(--ink);
+    }
+    .icon svg { width: 22px; height: 22px; }
+
+    /* Steps */
+    .steps { counter-reset: step; }
+    .step { position: relative; padding-left: 0; }
+    .step .num {
+      width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--white);
+      font-weight: 700; display: grid; place-items: center; font-size: 1rem;
+    }
+    .step h3 { margin-top: 14px; }
+
+    /* Pricing */
+    .pricing { padding: 72px 0; }
+    .price-card {
+      max-width: 520px; margin: 0 auto; background: var(--white); border-radius: 26px;
+      box-shadow: var(--shadow); border: 1px solid var(--line); padding: 36px 28px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .price-card::before {
+      content: ""; position: absolute; inset: 0 0 auto 0; height: 6px;
+      background: linear-gradient(90deg, var(--sage), var(--ink));
+    }
+    .price { font-size: 3.2rem; font-weight: 700; color: var(--ink); letter-spacing: -0.03em; line-height: 1; margin: 8px 0 4px; }
+    .price small { font-size: 1rem; font-weight: 500; color: var(--muted); letter-spacing: 0; }
+    .price-card ul { list-style: none; padding: 0; margin: 26px 0; text-align: left; display: grid; gap: 12px; }
+    .price-card li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.98rem; }
+    .price-card li svg { width: 20px; height: 20px; flex: none; margin-top: 2px; color: var(--sage); }
+    .guarantee {
+      display: flex; gap: 10px; align-items: flex-start; justify-content: center; text-align: left;
+      margin-top: 18px; font-size: 0.9rem; color: var(--muted); background: var(--cream); border-radius: var(--radius-sm);
+      padding: 12px 14px; border: 1px solid var(--line);
+    }
+    .guarantee svg { width: 18px; height: 18px; flex: none; color: var(--ink); margin-top: 2px; }
+
+    /* FAQ */
+    .faq .wrap { max-width: 760px; }
+    details {
+      background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-sm);
+      padding: 0 20px; margin-bottom: 10px; box-shadow: var(--shadow-sm);
+    }
+    summary {
+      cursor: pointer; list-style: none; font-weight: 600; color: var(--ink); padding: 18px 0;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: ""; width: 10px; height: 10px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+      transform: rotate(45deg); transition: transform .2s ease; flex: none; margin-right: 4px;
+    }
+    details[open] summary::after { transform: rotate(-135deg); }
+    details p { padding: 0 0 18px; margin: 0; color: var(--muted); }
+
+    /* Final CTA */
+    .final { text-align: center; padding: 24px 0 80px; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 0.84rem; color: var(--muted); text-align: center; }
+    footer p { margin: 0 0 6px; }
+
+    /* Responsive */
+    @media (min-width: 640px) {
+      section { padding: 80px 0; }
+      .tiles { grid-template-columns: repeat(4, 1fr); }
+      .mock { padding: 26px; }
+      .mock-tabs { display: flex; }
+      .row { grid-template-columns: 120px 1fr; font-size: 0.86rem; }
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .price-card { padding: 44px 40px; }
+    }
+    @media (min-width: 900px) {
+      .grid-3 { grid-template-columns: repeat(3, 1fr); }
+      .grid-tabs { grid-template-columns: repeat(3, 1fr); }
+      .hero { padding: 88px 0 40px; }
+    }
+    @media (min-width: 640px) and (max-width: 899px) {
+      .grid-tabs { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, summary::after { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="#top" aria-label="Tidy Money home">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FAF7F2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 L9 12 L13 15 L20 7"/><path d="M15 7h5v5"/></svg>
+        </span>
+        Tidy Money
+      </a>
+      <a class="btn btn-sm" href="#" data-checkout>Get Tidy Money — $12</a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap">
+        <span class="eyebrow">Budget spreadsheet · Google Sheets &amp; Excel</span>
+        <h1>See exactly where your money goes — in one calm dashboard.</h1>
+        <p class="sub">A budget spreadsheet for Google Sheets &amp; Excel that does the math for you. Set it up in 10 minutes, keep it for years.</p>
+        <a class="btn btn-lg" href="#" data-checkout>
+          Get Tidy Money — $12
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+        </a>
+        <div class="meta">
+          <span>Google Sheets</span><span>Excel</span><span>One-time $12</span><span>Instant download</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard mock -->
+    <section class="mock-section" aria-labelledby="mock-heading">
+      <div class="wrap">
+        <h2 id="mock-heading" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Dashboard preview</h2>
+        <div class="mock" role="img" aria-label="Preview of the Tidy Money dashboard tab with example data: income $4,250, spent $3,180, left $1,070, savings rate 25%, and a planned versus actual bar chart for six categories.">
+          <div class="mock-bar">
+            <div class="mock-title">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7FA98B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18M9 21V9"/></svg>
+              Dashboard — September
+            </div>
+            <div class="mock-tabs" aria-hidden="true">
+              <span class="on">Dashboard</span><span>Monthly Budget</span><span>Transactions</span><span>Goals</span>
+            </div>
+            <span class="badge-example">Example data</span>
+          </div>
+
+          <div class="tiles" aria-hidden="true">
+            <div class="tile"><div class="label">Income</div><div class="value">$4,250</div></div>
+            <div class="tile"><div class="label">Spent</div><div class="value">$3,180</div></div>
+            <div class="tile accent"><div class="label">Left</div><div class="value">$1,070</div></div>
+            <div class="tile gold"><div class="label">Savings rate</div><div class="value">25%</div></div>
+          </div>
+
+          <div class="chart" aria-hidden="true">
+            <div class="chart-head">
+              <h3>Planned vs actual</h3>
+              <div class="legend"><span><i class="planned"></i>Planned</span><span><i class="actual"></i>Actual</span></div>
+            </div>
+            <div class="rows">
+              <!-- widths are percentages of the largest planned amount (Housing $1,400) -->
+              <div class="row"><span class="cat">Housing</span><div class="bars"><div class="bar planned" style="width:100%"></div><div class="bar actual" style="width:100%"></div><span class="amt">$1,400 / $1,400</span></div></div>
+              <div class="row"><span class="cat">Groceries</span><div class="bars"><div class="bar planned" style="width:43%"></div><div class="bar actual" style="width:39%"></div><span class="amt">$540 / $600</span></div></div>
+              <div class="row"><span class="cat">Transport</span><div class="bars"><div class="bar planned" style="width:25%"></div><div class="bar actual" style="width:22%"></div><span class="amt">$310 / $350</span></div></div>
+              <div class="row"><span class="cat">Eating out</span><div class="bars"><div class="bar planned" style="width:18%"></div><div class="bar actual over" style="width:23%"></div><span class="amt">$320 / $250</span></div></div>
+              <div class="row"><span class="cat">Subscriptions</span><div class="bars"><div class="bar planned" style="width:9%"></div><div class="bar actual" style="width:8%"></div><span class="amt">$110 / $120</span></div></div>
+              <div class="row"><span class="cat">Fun</span><div class="bars"><div class="bar planned" style="width:14%"></div><div class="bar actual over" style="width:16%"></div><span class="amt">$220 / $200</span></div></div>
+            </div>
+            <p class="chart-note"><i></i>Highlighted bars are over plan · amounts shown as actual / planned</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's inside -->
+    <section id="inside" aria-labelledby="inside-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">What's inside</span>
+          <h2 id="inside-heading">Nine tabs. One file. Everything connected.</h2>
+          <p>Log a transaction once and every other tab updates on its own.</p>
+        </div>
+        <div class="grid grid-tabs">
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="11" width="8" height="10" rx="2"/><rect x="3" y="14" width="8" height="7" rx="2"/></svg></div>
+            <h3>Dashboard</h3>
+            <p>Monthly income, spending, what's left, savings rate, top categories and a planned vs actual chart — all in one view.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+            <h3>Monthly Budget</h3>
+            <p>Planned vs actual by category, auto-filled from your transactions. See the difference at a glance.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
+            <h3>Transactions log</h3>
+            <p>Date, description, amount and a dropdown category. Type it in and the math is done for you.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div>
+            <h3>Budget Plan</h3>
+            <p>12 months of targets. Set defaults once, then override any single month when life changes.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M4 16l5-6 4 3 7-8"/></svg></div>
+            <h3>Annual Overview</h3>
+            <p>Every category across 12 months plus a trend chart, so you can see the whole year on one screen.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
+            <h3>Savings Goals</h3>
+            <p>Sinking funds with progress bars and the monthly amount needed to reach each goal by its date.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+            <h3>Debt Payoff planner</h3>
+            <p>Choose snowball or avalanche order. See months to payoff and an interest estimate for each debt.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+            <h3>Net Worth tracker</h3>
+            <p>Assets minus debts, 24 months side by side, with a chart that shows the direction over time.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 0 2 2h13"/></svg></div>
+            <h3>Start Here guide</h3>
+            <p>A short walkthrough inside the file, plus a Quick Start PDF, so you're set up in about 10 minutes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how" aria-labelledby="how-heading" style="background: var(--cream-2);">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">How it works</span>
+          <h2 id="how-heading">Three steps, no app to learn</h2>
+        </div>
+        <div class="grid grid-3 steps">
+          <article class="card step">
+            <div class="num" aria-hidden="true">1</div>
+            <h3>Buy &amp; download</h3>
+            <p>Check out and get the .xlsx file plus the Quick Start PDF right away, on the thank-you page and by email.</p>
+          </article>
+          <article class="card step">
+            <div class="num" aria-hidden="true">2</div>
+            <h3>Open in Google Sheets or Excel</h3>
+            <p>Import into Google Sheets or open in Excel. Pick your categories and starting month in the Settings tab.</p>
+          </article>
+          <article class="card step">
+            <div class="num" aria-hidden="true">3</div>
+            <h3>Log spending, watch the dashboard update</h3>
+            <p>Add transactions as you go. Budget, annual view, goals and net worth all recalculate automatically.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who it's for -->
+    <section id="who" aria-labelledby="who-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Who it's for</span>
+          <h2 id="who-heading">Made for people who want it simple</h2>
+        </div>
+        <div class="grid grid-3">
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 7.1 18.2l.9-5.5-4-3.9L9.5 8z"/></svg></div>
+            <h3>You want simple and pretty</h3>
+            <p>A practical system that's pleasant to open. Clean layout, clear numbers, nothing you don't need.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M15.5 14.5c3 0 6 1.8 6 5.5"/></svg></div>
+            <h3>Couples who share one sheet</h3>
+            <p>One file in a shared Google Drive. Both of you log spending; both of you see the same dashboard.</p>
+          </article>
+          <article class="card">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M7 15h4"/></svg></div>
+            <h3>Tired of monthly app fees</h3>
+            <p>Pay once, keep the file. No subscription, no account, no bank connection required.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing" aria-labelledby="pricing-heading" style="background: var(--cream-2);">
+      <div class="wrap">
+        <div class="price-card">
+          <span class="eyebrow">Launch price</span>
+          <h2 id="pricing-heading" style="font-size:1.35rem;">Tidy Money — Budget Dashboard</h2>
+          <div class="price">$12 <small>one-time</small></div>
+          <p class="muted" style="margin:0;">No subscription. Lifetime use.</p>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The Tidy Money .xlsx file — 9 connected tabs</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Quick Start PDF for Google Sheets and Excel</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Works in Google Sheets, Excel 2016+ and Microsoft 365</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Editable categories and dropdowns</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Instant download after checkout</span></li>
+          </ul>
+          <a class="btn btn-lg" href="#" data-checkout style="width:100%;">Get Tidy Money — $12</a>
+          <div class="guarantee">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span>7-day refund if it's not for you — just reply to your receipt email.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq" aria-labelledby="faq-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">FAQ</span>
+          <h2 id="faq-heading">Questions, answered</h2>
+        </div>
+        <details>
+          <summary>Does it work in Google Sheets?</summary>
+          <p>Yes. Open the .xlsx in Google Sheets, or use File &gt; Import. All formulas are compatible.</p>
+        </details>
+        <details>
+          <summary>Does it work in Excel?</summary>
+          <p>Yes — Excel 2016 and newer, and Microsoft 365, on Mac and Windows. Apple Numbers opens it too, with minor chart differences.</p>
+        </details>
+        <details>
+          <summary>Is it a subscription?</summary>
+          <p>No. It's a one-time $12 purchase with lifetime use.</p>
+        </details>
+        <details>
+          <summary>How is it delivered?</summary>
+          <p>Instantly after checkout via Whop. You'll get the download link on the thank-you page and by email.</p>
+        </details>
+        <details>
+          <summary>Can I customize categories?</summary>
+          <p>Yes. Edit the Settings tab and the dropdowns update automatically across the file.</p>
+        </details>
+        <details>
+          <summary>What about refunds?</summary>
+          <p>7 days, no questions. Reply to your receipt email and we'll take care of it.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final">
+      <div class="wrap">
+        <h2>Ready to see where your money goes?</h2>
+        <p class="muted" style="margin-bottom:24px;">One file. Ten minutes to set up. Yours to keep.</p>
+        <a class="btn btn-lg" href="#" data-checkout>Get Tidy Money — $12</a>
+        <p class="muted" style="margin-top:14px;font-size:0.9rem;">Google Sheets · Excel · One-time $12 · Instant download</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2026 Tidy Money · Contact: support via your Whop receipt · Privacy: this page sets no cookies of its own</p>
+      <p>Dashboard preview shows example data. Tidy Money is a spreadsheet template, not financial advice.</p>
+    </div>
+  </footer>
+
+  <script>
+    var CHECKOUT_URL = "#";
+    (function () {
+      var buttons = document.querySelectorAll('[data-checkout]');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].setAttribute('href', CHECKOUT_URL);
+        buttons[i].addEventListener('click', function () {
+          if (window.fbq) { window.fbq('track', 'InitiateCheckout'); }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
