@@ -133,6 +133,19 @@ sample = [
     (dt.date(YEAR, 9, 22), "Coffee", "Expense", "Eating out", 6.50, "Cash", "example"),
     (dt.date(YEAR, 9, 25), "Car insurance", "Expense", "Insurance", 118.00, "Checking", "example"),
     (dt.date(YEAR, 9, 27), "Concert tickets", "Expense", "Fun & hobbies", 75.00, "Credit card", "example"),
+    (dt.date(YEAR, 9, 2), "Doctor copay", "Expense", "Health", 40.00, "Credit card", "example"),
+    (dt.date(YEAR, 9, 5), "Grocery run", "Expense", "Groceries", 115.20, "Credit card", "example"),
+    (dt.date(YEAR, 9, 10), "Gas", "Expense", "Transport", 48.00, "Credit card", "example"),
+    (dt.date(YEAR, 9, 11), "Music app", "Expense", "Subscriptions", 12.99, "Credit card", "example"),
+    (dt.date(YEAR, 9, 13), "Haircut", "Expense", "Personal care", 35.00, "Cash", "example"),
+    (dt.date(YEAR, 9, 19), "Grocery run", "Expense", "Groceries", 131.60, "Credit card", "example"),
+    (dt.date(YEAR, 9, 21), "Water bill", "Expense", "Utilities", 45.00, "Checking", "example"),
+    (dt.date(YEAR, 9, 23), "Birthday gift", "Expense", "Gifts & giving", 40.00, "Credit card", "example"),
+    (dt.date(YEAR, 9, 24), "Lunch", "Expense", "Eating out", 28.40, "Credit card", "example"),
+    (dt.date(YEAR, 9, 26), "Grocery run", "Expense", "Groceries", 120.35, "Credit card", "example"),
+    (dt.date(YEAR, 9, 28), "Parking", "Expense", "Transport", 12.00, "Cash", "example"),
+    (dt.date(YEAR, 9, 29), "Pharmacy", "Expense", "Health", 22.50, "Credit card", "example"),
+    (dt.date(YEAR, 9, 30), "Credit card payment", "Expense", "Debt payments", 250.00, "Checking", "example"),
 ]
 first = HDR_ROW + 1
 last = HDR_ROW + N_TX
@@ -491,8 +504,8 @@ for i in range(15):
     dp.cell(row=r, column=3).number_format = CUR0; dp.cell(row=r, column=4).number_format = '0.00%'; dp.cell(row=r, column=5).number_format = CUR0
     # order: snowball = rank by balance asc; avalanche = rank by APR desc (ties broken by row)
     dp.cell(row=r, column=6, value=(f'=IF(B{r}="","",IF($C$5="Snowball",'
-                                     f'COUNTIFS($C$8:$C$22,"<"&C{r},$B$8:$B$22,"<>")+COUNTIFS($C$8:$C$22,C{r},$B$8:$B$22,"<>")-COUNTIFS($C$8:$C{r},C{r},$B$8:$B{r},"<>")+1,'
-                                     f'COUNTIFS($D$8:$D$22,">"&D{r},$B$8:$B$22,"<>")+COUNTIFS($D$8:$D$22,D{r},$B$8:$B$22,"<>")-COUNTIFS($D$8:$D{r},D{r},$B$8:$B{r},"<>")+1))'))
+                                     f'SUMPRODUCT(($B$8:$B$22<>"")*($C$8:$C$22<C{r}))+SUMPRODUCT(($B$8:$B$22<>"")*($C$8:$C$22=C{r})*(ROW($B$8:$B$22)<{r}))+1,'
+                                     f'SUMPRODUCT(($B$8:$B$22<>"")*($D$8:$D$22>D{r}))+SUMPRODUCT(($B$8:$B$22<>"")*($D$8:$D$22=D{r})*(ROW($B$8:$B$22)<{r}))+1))'))
     dp.cell(row=r, column=7, value=f'=IF(B{r}="","",IF(E{r}<=C{r}*D{r}/12,"Never – raise payment",IFERROR(ROUNDUP(NPER(D{r}/12,-E{r},C{r}),0),ROUNDUP(C{r}/MAX(E{r},1),0))))')
     dp.cell(row=r, column=8, value=f'=IF(OR(B{r}="",NOT(ISNUMBER(G{r}))),"",G{r}*E{r}-C{r})').number_format = CUR0
     dp.cell(row=r, column=9, value=f'=IF(B{r}="","",C{r}*D{r}/12)').number_format = CUR
@@ -533,7 +546,7 @@ for i in range(24):
     for cc in (8, 13, 14): nw.cell(row=r, column=cc).font = f(bold=True); nw.cell(row=r, column=cc).fill = fill(SAGE_L)
     nw.cell(row=r, column=14).font = f(bold=True, color=INK)
 # sample 3 months
-samples_nw = [(2400, 6100, 15200, 0, 0, 3200, 21300, 0, 0), (2650, 6500, 15650, 0, 0, 3050, 21035, 0, 0), (2100, 6900, 15900, 0, 0, 2900, 20770, 0, 0)]
+samples_nw = [(2400, 6100, 15200, 0, 0, 3200, 8900, 0, 0), (2650, 6500, 15650, 0, 0, 3050, 8635, 0, 0), (2100, 6900, 15900, 0, 0, 2900, 8370, 0, 0)]
 for i, row in enumerate(samples_nw):
     for cc, v in zip((3, 4, 5, 6, 7, 9, 10, 11, 12), row):
         nw.cell(row=7 + i, column=cc, value=v)
