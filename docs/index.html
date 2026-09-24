@@ -8,6 +8,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Tidy Money — Budget Dashboard">
   <meta property="og:description" content="See exactly where your money goes — in one calm dashboard. A budget spreadsheet for Google Sheets &amp; Excel. One-time $12, instant download.">
+  <meta property="og:image" content="https://001gomesgomes-cell.github.io/tidy-money/img/hero-laptop.jpg">
   <meta name="theme-color" content="#FAF7F2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,11 +20,11 @@ n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2554274264996886');
+fbq('init', '2152561025695130');
 fbq('track', 'PageView');
 fbq('track', 'ViewContent', {content_name: 'Tidy Money Budget Dashboard', content_type: 'product', value: 12.00, currency: 'USD'});
 </script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2554274264996886&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2152561025695130&ev=PageView&noscript=1"/></noscript>
   <style>
     :root {
       --cream: #FAF7F2;
@@ -35,6 +36,10 @@ fbq('track', 'ViewContent', {content_name: 'Tidy Money Budget Dashboard', conten
       --sage-line: #C9DACD;
       --mustard: #E3B23C;
       --mustard-soft: #F7EBCB;
+      --yellow: #FFF6D1;
+      --yellow-line: #EAD48A;
+      --red: #A63D2F;
+      --red-soft: #FBE7E3;
       --text: #1B1B1B;
       --muted: #5C6660;
       --white: #FFFFFF;
@@ -44,6 +49,7 @@ fbq('track', 'ViewContent', {content_name: 'Tidy Money Budget Dashboard', conten
       --shadow: 0 10px 30px rgba(31, 61, 43, 0.08), 0 1px 3px rgba(31, 61, 43, 0.06);
       --shadow-sm: 0 4px 14px rgba(31, 61, 43, 0.06);
       --font: "DM Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       --max: 1080px;
     }
 
@@ -60,20 +66,22 @@ fbq('track', 'ViewContent', {content_name: 'Tidy Money Budget Dashboard', conten
     img, svg { display: block; max-width: 100%; }
     a { color: var(--ink); }
     h1, h2, h3, h4 { color: var(--ink); line-height: 1.15; margin: 0 0 0.5em; letter-spacing: -0.01em; }
-    h1 { font-size: clamp(2rem, 6vw, 3.4rem); font-weight: 700; letter-spacing: -0.025em; }
-    h2 { font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 700; }
+    h1 { font-size: clamp(2.1rem, 5.6vw, 3.3rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.08; }
+    h2 { font-size: clamp(1.6rem, 4vw, 2.25rem); font-weight: 700; letter-spacing: -0.02em; }
     h3 { font-size: 1.1rem; font-weight: 600; }
     p { margin: 0 0 1em; }
     .muted { color: var(--muted); }
     .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
     section { padding: 64px 0; }
-    .section-head { max-width: 640px; margin: 0 auto 40px; text-align: center; }
-    .section-head p { color: var(--muted); font-size: 1.05rem; }
+    .section-head { max-width: 640px; margin: 0 auto 36px; text-align: center; }
+    .section-head p { color: var(--muted); font-size: 1.05rem; margin: 0; }
     .eyebrow {
-      display: inline-block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+      display: inline-block; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.09em;
       text-transform: uppercase; color: var(--ink-2); background: var(--sage-soft);
       padding: 6px 12px; border-radius: 999px; margin-bottom: 14px;
     }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .tone { background: var(--cream-2); }
 
     :focus-visible { outline: 3px solid var(--mustard); outline-offset: 3px; border-radius: 6px; }
 
@@ -108,58 +116,120 @@ fbq('track', 'ViewContent', {content_name: 'Tidy Money Budget Dashboard', conten
     .wordmark .mark svg { width: 18px; height: 18px; }
 
     /* Hero */
-    .hero { padding: 64px 0 32px; text-align: center; }
-    .hero .wrap { max-width: 760px; }
-    .hero p.sub { font-size: clamp(1.05rem, 2.4vw, 1.3rem); color: var(--muted); margin: 18px auto 30px; max-width: 600px; }
-    .hero .meta { margin-top: 18px; font-size: 0.92rem; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 10px; }
-    .hero .meta span::after { content: "·"; margin-left: 10px; color: var(--sage); }
-    .hero .meta span:last-child::after { content: none; }
-
-    /* Dashboard mock */
-    .mock-section { padding: 24px 0 72px; }
-    .mock {
-      position: relative; background: var(--white); border-radius: 24px; box-shadow: var(--shadow);
-      border: 1px solid var(--line); padding: 20px; overflow: hidden;
+    .hero { padding: 48px 0 40px; }
+    .hero-grid { display: grid; gap: 32px; align-items: center; }
+    .hero-grid > * { min-width: 0; }
+    .hero p.sub { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--muted); margin: 18px 0 26px; max-width: 540px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 7px; font-size: 0.84rem; font-weight: 500; color: var(--ink);
+      background: var(--white); border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px;
     }
-    .mock-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 18px; }
-    .mock-title { display: flex; align-items: center; gap: 10px; font-weight: 600; color: var(--ink); font-size: 0.95rem; }
-    .mock-tabs { display: none; gap: 6px; }
-    .mock-tabs span { font-size: 0.72rem; padding: 5px 10px; border-radius: 999px; background: var(--cream-2); color: var(--muted); }
-    .mock-tabs span.on { background: var(--ink); color: var(--white); }
+    .chip svg { width: 14px; height: 14px; color: var(--sage); flex: none; }
+    .hero-art {
+      position: relative; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow);
+      border: 1px solid var(--line); background: var(--cream-2); aspect-ratio: 4 / 3;
+    }
+    .hero-art img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+    /* Workbook viewer */
+    .viewer-section { padding-top: 40px; }
+    .viewer { background: var(--white); border: 1px solid var(--line); border-radius: 24px; box-shadow: var(--shadow); overflow: hidden; }
+    .viewer-top {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 12px 14px; border-bottom: 1px solid var(--line); background: var(--cream);
+    }
+    .tablist { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; min-width: 0; flex: 1; }
+    .tablist::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex: none; font: inherit; font-size: 0.86rem; font-weight: 600; color: var(--muted);
+      background: transparent; border: 1px solid transparent; border-radius: 999px; padding: 8px 14px;
+      cursor: pointer; white-space: nowrap; transition: background .15s ease, color .15s ease;
+    }
+    .tab-btn[aria-selected="true"] { background: var(--ink); color: var(--white); }
+    .tab-btn:hover:not([aria-selected="true"]) { background: var(--cream-2); color: var(--ink); }
     .badge-example {
-      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      flex: none; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
       color: #6B5312; background: var(--mustard-soft); border: 1px solid #EBD69A;
       padding: 5px 10px; border-radius: 999px; white-space: nowrap;
     }
-    .tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 18px; }
-    .tile { background: var(--cream); border-radius: var(--radius-sm); padding: 14px 16px; border: 1px solid var(--line); }
-    .tile .label { font-size: 0.78rem; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
-    .tile .value { font-size: 1.45rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+    .tab-panel { padding: 18px 16px 20px; }
+    .tab-panel[hidden] { display: none; }
+    .sheet-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin-bottom: 14px; font-size: 0.86rem; }
+    .sheet-name { font-weight: 600; color: var(--ink); display: inline-flex; align-items: center; gap: 8px; }
+    .sheet-name::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--sage); }
+    .kvs { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+    .kv { color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+    .cell-in {
+      display: inline-block; background: var(--yellow); border: 1px solid var(--yellow-line); border-radius: 6px;
+      padding: 3px 9px; color: var(--text); font-weight: 500; font-variant-numeric: tabular-nums;
+    }
+    .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .framed { border: 1px solid var(--sage-line); border-radius: 10px; }
+    .sheet { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 0.82rem; font-variant-numeric: tabular-nums; line-height: 1.3; }
+    .sheet th, .sheet td {
+      padding: 8px 10px; border-right: 1px solid var(--sage-line); border-bottom: 1px solid var(--sage-line);
+      text-align: right; white-space: nowrap; vertical-align: middle;
+    }
+    .sheet th:last-child, .sheet td:last-child { border-right: 0; }
+    .sheet tbody tr:last-child td { border-bottom: 0; }
+    .sheet tbody.has-foot tr:last-child td { border-bottom: 1px solid var(--sage-line); }
+    .sheet tfoot td { border-bottom: 0; background: var(--cream); font-weight: 600; }
+    .sheet th:first-child, .sheet td:first-child { text-align: left; font-weight: 500; color: var(--ink); }
+    .sheet thead th { background: var(--sage-soft); color: var(--ink); font-weight: 600; font-size: 0.76rem; letter-spacing: 0.01em; }
+    .sheet td.in { background: var(--yellow); }
+    .sheet td.neg { color: var(--red); background: var(--red-soft); font-weight: 600; }
+    .sheet td.ok { color: var(--ink-2); background: var(--sage-soft); font-weight: 600; }
+    .sheet td.cur { background: var(--cream); }
+    .sheet tr.hl td { background: var(--mustard-soft); }
+    .sheet tr.hl td.in { background: #F9E7B4; }
+    .sheet td.dim { color: var(--muted); }
+    .pct { min-width: 118px; }
+    .pct > span:first-child { display: block; }
+    .bar { display: block; height: 5px; border-radius: 3px; background: var(--cream-2); margin-top: 5px; overflow: hidden; }
+    .bar i { display: block; height: 100%; width: var(--w, 0%); background: var(--sage); border-radius: 3px; }
+    .bar.gold i { background: var(--mustard); }
+    .bar.over i { background: var(--red); }
+    .sheet-note { margin: 12px 0 0; font-size: 0.78rem; color: var(--muted); }
+
+    .tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 14px; }
+    .tile { background: var(--cream); border-radius: var(--radius-sm); padding: 12px 14px; border: 1px solid var(--line); min-width: 0; }
+    .tile .label { font-size: 0.76rem; color: var(--muted); font-weight: 500; margin-bottom: 3px; }
+    .tile .value { font-size: 1.35rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
     .tile.accent { background: var(--sage-soft); border-color: var(--sage-line); }
     .tile.gold { background: var(--mustard-soft); border-color: #EBD69A; }
-    .tile .value small { font-size: 0.85rem; font-weight: 500; color: var(--muted); margin-left: 4px; }
 
-    .chart { background: var(--cream); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 16px; }
-    .chart-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
-    .chart-head h3 { margin: 0; font-size: 0.95rem; }
-    .legend { display: flex; gap: 14px; font-size: 0.78rem; color: var(--muted); }
+    .dash-grid { display: grid; gap: 14px; }
+    .dash-grid > * { min-width: 0; }
+    .mini { background: var(--cream); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+    .mini h4 { margin: 0 0 10px; font-size: 0.74rem; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; }
+    .mini ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+    .mini li { font-size: 0.84rem; }
+    .mini .r { display: flex; justify-content: space-between; gap: 10px; }
+    .mini .r b { font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+    .ann-chart { margin-top: 14px; background: var(--cream); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px 12px; }
+    .chart-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+    .chart-head h4 { margin: 0; font-size: 0.84rem; }
+    .legend { display: flex; gap: 14px; font-size: 0.76rem; color: var(--muted); }
     .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
-    .legend .planned { background: var(--sage-soft); border: 1px solid var(--sage); }
-    .legend .actual { background: var(--ink); }
-    .rows { display: grid; gap: 10px; }
-    .row { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 10px; font-size: 0.82rem; }
-    .row .cat { color: var(--text); font-weight: 500; }
-    .bars { position: relative; height: 22px; }
-    .bar { position: absolute; left: 0; top: 0; height: 100%; border-radius: 6px; }
-    .bar.planned { background: var(--sage-soft); border: 1px solid var(--sage); }
-    .bar.actual { top: 5px; height: 12px; background: var(--ink); border-radius: 4px; }
-    .bar.actual.over { background: var(--mustard); }
-    .row .amt { position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 0.74rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-left: 6px; }
-    .chart-note { margin: 12px 0 0; font-size: 0.76rem; color: var(--muted); }
-    .chart-note i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; background: var(--mustard); margin-right: 6px; vertical-align: -1px; }
+    .legend .e { background: var(--ink); }
+    .legend .s { background: var(--sage); }
+    .ann-bars { display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px; height: 130px; align-items: end; min-width: 420px; }
+    .ann-bars .m { display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+    .ann-bars .s { background: var(--sage); border-radius: 3px 3px 0 0; }
+    .ann-bars .e { background: var(--ink); border-radius: 0 0 3px 3px; }
+    .ann-bars .m.cur .e { background: var(--ink-2); }
+    .ann-labels { display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px; font-size: 0.7rem; color: var(--muted); text-align: center; margin-top: 6px; min-width: 420px; }
+    .legend-note { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center; font-size: 0.8rem; color: var(--muted); margin: 14px 0 0; }
+    .sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -2px; border: 1px solid var(--sage-line); }
+    .sw.in { background: var(--yellow); border-color: var(--yellow-line); }
+    .sw.calc { background: var(--white); }
+    .sw.over { background: var(--red-soft); border-color: #E7B8B0; }
 
     /* Grids and cards */
     .grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
+    .grid > * { min-width: 0; }
     .card {
       background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
       padding: 24px; box-shadow: var(--shadow-sm);
@@ -171,15 +241,59 @@ fbq('track', 'ViewContent', {content_name: 'Tidy Money Budget Dashboard', conten
       display: grid; place-items: center; color: var(--ink);
     }
     .icon svg { width: 22px; height: 22px; }
+    .card.compact { padding: 18px; }
+    .card.compact .icon { width: 36px; height: 36px; border-radius: 10px; }
+    .card.compact .icon svg { width: 18px; height: 18px; }
+    .card.compact h3 { font-size: 0.98rem; margin-top: 10px; }
+    .card.compact p { font-size: 0.88rem; }
 
     /* Steps */
-    .steps { counter-reset: step; }
-    .step { position: relative; padding-left: 0; }
     .step .num {
       width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--white);
       font-weight: 700; display: grid; place-items: center; font-size: 1rem;
     }
     .step h3 { margin-top: 14px; }
+
+    /* Who it's for */
+    .who-grid { display: grid; gap: 16px; }
+    .who-grid > * { min-width: 0; }
+    .who-photo { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow-sm); aspect-ratio: 4 / 3; background: var(--cream-2); }
+    .who-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .who-photo figcaption {
+      position: absolute; left: 14px; right: 14px; bottom: 14px; font-size: 0.84rem; color: var(--ink);
+      background: rgba(250, 247, 242, 0.92); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px;
+    }
+    .who-cards { display: grid; gap: 16px; }
+
+    /* Compare */
+    .compare-card { padding: 0; overflow: hidden; }
+    .compare { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 640px; font-size: 0.92rem; }
+    .compare th, .compare td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .compare thead th { font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 600; background: var(--cream); }
+    .compare tbody th { font-weight: 600; color: var(--ink); white-space: nowrap; }
+    .compare tbody tr:last-child td, .compare tbody tr:last-child th { border-bottom: 0; }
+    .compare td { color: var(--muted); }
+    .compare .us { background: var(--sage-soft); color: var(--ink); font-weight: 500; }
+    .compare thead .us { color: var(--ink); }
+    .compare-note { text-align: center; font-size: 0.82rem; color: var(--muted); margin: 14px 0 0; }
+
+    /* Files */
+    .file { display: grid; grid-template-columns: 52px 1fr; gap: 16px; align-items: start; }
+    .file-icon { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: var(--sage-soft); color: var(--ink); }
+    .file-icon.pdf { background: var(--mustard-soft); color: #6B5312; }
+    .file-icon svg { width: 26px; height: 26px; }
+    .file h3 { margin: 4px 0 8px; font-size: 0.98rem; line-height: 1.4; }
+    .file h3 code { font-family: var(--mono); font-size: 0.82rem; font-weight: 600; color: var(--ink); background: var(--cream); border: 1px solid var(--line); padding: 3px 7px; border-radius: 6px; overflow-wrap: anywhere; }
+    .file .kind { font-size: 0.8rem; color: var(--muted); margin-bottom: 10px; }
+    .specs { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+    .specs li { font-size: 0.92rem; color: var(--muted); padding-left: 18px; position: relative; }
+    .specs li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 8px; height: 8px; border-radius: 50%; background: var(--sage); }
+
+    /* About */
+    .about { padding: 64px 0 72px; }
+    .about-card { max-width: 720px; margin: 0 auto; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 24px; box-shadow: var(--shadow-sm); }
+    .about-card p { margin: 0; color: var(--muted); }
+    .about-card .eyebrow { margin-bottom: 12px; }
 
     /* Pricing */
     .pricing { padding: 72px 0; }
@@ -232,25 +346,29 @@ fbq('track', 'ViewContent', {content_name: 'Tidy Money Budget Dashboard', conten
     /* Responsive */
     @media (min-width: 640px) {
       section { padding: 80px 0; }
+      .viewer-section { padding-top: 48px; }
+      .section-head { margin-bottom: 44px; }
       .tiles { grid-template-columns: repeat(4, 1fr); }
-      .mock { padding: 26px; }
-      .mock-tabs { display: flex; }
-      .row { grid-template-columns: 120px 1fr; font-size: 0.86rem; }
+      .tab-panel { padding: 22px 24px 26px; }
+      .viewer-top { padding: 14px 20px; }
       .grid-3 { grid-template-columns: repeat(3, 1fr); }
       .grid-2 { grid-template-columns: repeat(2, 1fr); }
+      .grid-tabs { grid-template-columns: repeat(2, 1fr); }
       .price-card { padding: 44px 40px; }
+      .about-card { padding: 32px 36px; }
     }
     @media (min-width: 900px) {
-      .grid-3 { grid-template-columns: repeat(3, 1fr); }
-      .grid-tabs { grid-template-columns: repeat(3, 1fr); }
-      .hero { padding: 88px 0 40px; }
-    }
-    @media (min-width: 640px) and (max-width: 899px) {
-      .grid-tabs { grid-template-columns: repeat(2, 1fr); }
+      .hero { padding: 72px 0 48px; }
+      .hero-grid { grid-template-columns: 1.05fr 0.95fr; gap: 48px; }
+      .hero-art { aspect-ratio: 1 / 1; }
+      .grid-tabs { grid-template-columns: repeat(5, 1fr); }
+      .dash-grid { grid-template-columns: 1.6fr 1fr; align-items: start; }
+      .who-grid { grid-template-columns: 5fr 7fr; align-items: stretch; }
+      .who-photo { aspect-ratio: auto; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .btn, summary::after { transition: none; }
+      .btn, .tab-btn, summary::after { transition: none; }
     }
   </style>
 </head>
@@ -272,123 +390,248 @@ fbq('track', 'ViewContent', {content_name: 'Tidy Money Budget Dashboard', conten
 
     <!-- Hero -->
     <section class="hero">
-      <div class="wrap">
-        <span class="eyebrow">Budget spreadsheet · Google Sheets &amp; Excel</span>
-        <h1>See exactly where your money goes — in one calm dashboard.</h1>
-        <p class="sub">A budget spreadsheet for Google Sheets &amp; Excel that does the math for you. Set it up in 10 minutes, keep it for years.</p>
-        <a class="btn btn-lg" href="#" data-checkout>
-          Get Tidy Money — $12
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-        </a>
-        <div class="meta">
-          <span>Google Sheets</span><span>Excel</span><span>One-time $12</span><span>Instant download</span>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Budget spreadsheet · Google Sheets &amp; Excel</span>
+          <h1>See exactly where your money goes — in one calm dashboard.</h1>
+          <p class="sub">A budget spreadsheet for Google Sheets &amp; Excel that does the math for you. Set it up in 10 minutes, keep it for years.</p>
+          <a class="btn btn-lg" href="#" data-checkout>
+            Get Tidy Money — $12
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+          </a>
+          <ul class="chips" aria-label="Product facts">
+            <li class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Works in Google Sheets &amp; Excel</li>
+            <li class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>Instant download (.xlsx + PDF guide)</li>
+            <li class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>One-time $12 · no subscription</li>
+          </ul>
+        </div>
+        <div class="hero-art">
+          <img src="img/hero-laptop.jpg" width="1400" height="1400" fetchpriority="high" alt="A laptop on a kitchen table showing a green budget dashboard">
         </div>
       </div>
     </section>
 
-    <!-- Dashboard mock -->
-    <section class="mock-section" aria-labelledby="mock-heading">
+    <!-- Inside the workbook -->
+    <section id="inside" class="viewer-section" aria-labelledby="inside-heading">
       <div class="wrap">
-        <h2 id="mock-heading" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;">Dashboard preview</h2>
-        <div class="mock" role="img" aria-label="Preview of the Tidy Money dashboard tab with example data: income $4,250, spent $3,180, left $1,070, savings rate 25%, and a planned versus actual bar chart for six categories.">
-          <div class="mock-bar">
-            <div class="mock-title">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7FA98B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M3 9h18M9 21V9"/></svg>
-              Dashboard — September
-            </div>
-            <div class="mock-tabs" aria-hidden="true">
-              <span class="on">Dashboard</span><span>Monthly Budget</span><span>Transactions</span><span>Goals</span>
+        <div class="section-head">
+          <span class="eyebrow">Inside the workbook</span>
+          <h2 id="inside-heading">What the sheets actually look like</h2>
+          <p>Four of the ten tabs, rebuilt here with example numbers. Yellow cells are the ones you type in; everything else is calculated for you.</p>
+        </div>
+
+        <div class="viewer">
+          <div class="viewer-top">
+            <div class="tablist" role="tablist" aria-label="Workbook tabs">
+              <button class="tab-btn" role="tab" id="tab-dash" aria-controls="panel-dash" aria-selected="true">Dashboard</button>
+              <button class="tab-btn" role="tab" id="tab-goals" aria-controls="panel-goals" aria-selected="false" tabindex="-1">Savings Goals</button>
+              <button class="tab-btn" role="tab" id="tab-debt" aria-controls="panel-debt" aria-selected="false" tabindex="-1">Debt Payoff</button>
+              <button class="tab-btn" role="tab" id="tab-annual" aria-controls="panel-annual" aria-selected="false" tabindex="-1">Annual Overview</button>
             </div>
             <span class="badge-example">Example data</span>
           </div>
 
-          <div class="tiles" aria-hidden="true">
-            <div class="tile"><div class="label">Income</div><div class="value">$4,250</div></div>
-            <div class="tile"><div class="label">Spent</div><div class="value">$3,180</div></div>
-            <div class="tile accent"><div class="label">Left</div><div class="value">$1,070</div></div>
-            <div class="tile gold"><div class="label">Savings rate</div><div class="value">25%</div></div>
+          <!-- Dashboard -->
+          <div class="tab-panel" role="tabpanel" id="panel-dash" aria-labelledby="tab-dash">
+            <div class="sheet-bar">
+              <span class="sheet-name">Dashboard</span>
+              <span class="kv">Month <span class="cell-in">September 2026 &#9662;</span></span>
+            </div>
+            <div class="tiles">
+              <div class="tile"><div class="label">Income</div><div class="value">$6,850</div></div>
+              <div class="tile"><div class="label">Spent</div><div class="value">$3,610</div></div>
+              <div class="tile accent"><div class="label">Left over</div><div class="value">$3,240</div></div>
+              <div class="tile gold"><div class="label">Savings rate</div><div class="value">47%</div></div>
+            </div>
+            <div class="dash-grid">
+              <div class="scroll framed">
+                <table class="sheet">
+                  <caption class="sr-only">Planned versus actual spending by category, September 2026, example data</caption>
+                  <thead><tr><th>Category</th><th>Planned</th><th>Actual</th><th>Left</th><th>% used</th></tr></thead>
+                  <tbody>
+                    <tr><td>Housing</td><td>1,450</td><td>1,450</td><td>0</td><td class="pct"><span>100%</span><span class="bar"><i style="--w:100%"></i></span></td></tr>
+                    <tr><td>Groceries</td><td>550</td><td>496</td><td>54</td><td class="pct"><span>90%</span><span class="bar"><i style="--w:90%"></i></span></td></tr>
+                    <tr><td>Eating out</td><td>200</td><td>99</td><td>101</td><td class="pct"><span>50%</span><span class="bar"><i style="--w:50%"></i></span></td></tr>
+                    <tr><td>Transport</td><td>220</td><td>112</td><td>108</td><td class="pct"><span>51%</span><span class="bar"><i style="--w:51%"></i></span></td></tr>
+                    <tr><td>Subscriptions</td><td>45</td><td>29</td><td>16</td><td class="pct"><span>64%</span><span class="bar"><i style="--w:64%"></i></span></td></tr>
+                    <tr><td>Utilities</td><td>120</td><td>141</td><td class="neg">-21</td><td class="pct"><span>118%</span><span class="bar over"><i style="--w:100%"></i></span></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <aside class="mini" aria-label="Top spending, example data">
+                <h4>Top spending</h4>
+                <ol>
+                  <li><div class="r"><span>Housing</span><b>$1,450</b></div><span class="bar"><i style="--w:100%"></i></span></li>
+                  <li><div class="r"><span>Groceries</span><b>$496</b></div><span class="bar"><i style="--w:34%"></i></span></li>
+                  <li><div class="r"><span>Savings transfers</span><b>$400</b></div><span class="bar"><i style="--w:28%"></i></span></li>
+                  <li><div class="r"><span>Debt payments</span><b>$250</b></div><span class="bar"><i style="--w:17%"></i></span></li>
+                  <li><div class="r"><span>Utilities</span><b>$141</b></div><span class="bar"><i style="--w:10%"></i></span></li>
+                </ol>
+              </aside>
+            </div>
+            <p class="sheet-note">Pick a month from the dropdown and every number on this tab switches to that month. A negative “Left” cell turns red on its own.</p>
           </div>
 
-          <div class="chart" aria-hidden="true">
-            <div class="chart-head">
-              <h3>Planned vs actual</h3>
-              <div class="legend"><span><i class="planned"></i>Planned</span><span><i class="actual"></i>Actual</span></div>
+          <!-- Savings Goals -->
+          <div class="tab-panel" role="tabpanel" id="panel-goals" aria-labelledby="tab-goals" hidden>
+            <div class="sheet-bar">
+              <span class="sheet-name">Savings Goals</span>
+              <span class="kv">4 goals · $849 to set aside per month</span>
             </div>
-            <div class="rows">
-              <!-- widths are percentages of the largest planned amount (Housing $1,400) -->
-              <div class="row"><span class="cat">Housing</span><div class="bars"><div class="bar planned" style="width:100%"></div><div class="bar actual" style="width:100%"></div><span class="amt">$1,400 / $1,400</span></div></div>
-              <div class="row"><span class="cat">Groceries</span><div class="bars"><div class="bar planned" style="width:43%"></div><div class="bar actual" style="width:39%"></div><span class="amt">$540 / $600</span></div></div>
-              <div class="row"><span class="cat">Transport</span><div class="bars"><div class="bar planned" style="width:25%"></div><div class="bar actual" style="width:22%"></div><span class="amt">$310 / $350</span></div></div>
-              <div class="row"><span class="cat">Eating out</span><div class="bars"><div class="bar planned" style="width:18%"></div><div class="bar actual over" style="width:23%"></div><span class="amt">$320 / $250</span></div></div>
-              <div class="row"><span class="cat">Subscriptions</span><div class="bars"><div class="bar planned" style="width:9%"></div><div class="bar actual" style="width:8%"></div><span class="amt">$110 / $120</span></div></div>
-              <div class="row"><span class="cat">Fun</span><div class="bars"><div class="bar planned" style="width:14%"></div><div class="bar actual over" style="width:16%"></div><span class="amt">$220 / $200</span></div></div>
+            <div class="scroll framed">
+              <table class="sheet">
+                <caption class="sr-only">Savings goals with progress and monthly amount needed, example data</caption>
+                <thead><tr><th>Goal</th><th>Target</th><th>Saved</th><th>Remaining</th><th>Progress</th><th>Target date</th><th>Months left</th><th>Save per month</th></tr></thead>
+                <tbody>
+                  <tr><td class="in">Emergency fund</td><td class="in">6,000</td><td class="in">2,150</td><td>3,850</td><td class="pct"><span>36%</span><span class="bar gold"><i style="--w:36%"></i></span></td><td class="in">Jun 30 2027</td><td>9</td><td>$428</td></tr>
+                  <tr><td class="in">Vacation</td><td class="in">1,800</td><td class="in">400</td><td>1,400</td><td class="pct"><span>22%</span><span class="bar gold"><i style="--w:22%"></i></span></td><td class="in">Mar 1 2027</td><td>6</td><td>$233</td></tr>
+                  <tr><td class="in">New laptop</td><td class="in">1,400</td><td class="in">1,400</td><td>0</td><td class="pct"><span>100%</span><span class="bar gold"><i style="--w:100%"></i></span></td><td class="in dim">—</td><td class="dim">—</td><td class="ok">Done ✓</td></tr>
+                  <tr><td class="in">Car repairs fund</td><td class="in">1,000</td><td class="in">250</td><td>750</td><td class="pct"><span>25%</span><span class="bar gold"><i style="--w:25%"></i></span></td><td class="in">Jan 31 2027</td><td>4</td><td>$188</td></tr>
+                </tbody>
+              </table>
             </div>
-            <p class="chart-note"><i></i>Highlighted bars are over plan · amounts shown as actual / planned</p>
+            <p class="sheet-note">Type a goal, a target and a date. The sheet works out what is left, how many months remain and what to set aside each month to make it.</p>
+          </div>
+
+          <!-- Debt Payoff -->
+          <div class="tab-panel" role="tabpanel" id="panel-debt" aria-labelledby="tab-debt" hidden>
+            <div class="sheet-bar">
+              <span class="sheet-name">Debt Payoff</span>
+              <div class="kvs">
+                <span class="kv">Method <span class="cell-in">Avalanche &#9662;</span></span>
+                <span class="kv">Extra per month <span class="cell-in">$150</span></span>
+              </div>
+            </div>
+            <div class="scroll framed">
+              <table class="sheet">
+                <caption class="sr-only">Debt payoff planner with payoff order, example data</caption>
+                <thead><tr><th>Debt</th><th>Balance</th><th>APR</th><th>Minimum</th><th>Payoff order</th><th>Months at minimum</th><th>Interest at minimum</th></tr></thead>
+                <tbody class="has-foot">
+                  <tr class="hl"><td class="in">Store card</td><td class="in">640</td><td class="in">28.99%</td><td class="in">30</td><td>1</td><td>30</td><td>$260</td></tr>
+                  <tr><td class="in">Credit card A</td><td class="in">3,200</td><td class="in">24.99%</td><td class="in">95</td><td>2</td><td>59</td><td>$2,405</td></tr>
+                  <tr><td class="in">Car loan</td><td class="in">8,900</td><td class="in">6.9%</td><td class="in">265</td><td>3</td><td>37</td><td>$920</td></tr>
+                  <tr><td class="in">Student loan</td><td class="in">12,400</td><td class="in">5.5%</td><td class="in">140</td><td>4</td><td>117</td><td>$3,980</td></tr>
+                </tbody>
+                <tfoot><tr><td>Total</td><td>25,140</td><td></td><td>530</td><td></td><td></td><td>$7,565</td></tr></tfoot>
+              </table>
+            </div>
+            <p class="sheet-note">Avalanche orders debts by highest APR first; Snowball by smallest balance first. The highlighted row is where the extra $150 goes until that balance is gone, then it rolls to the next one. Interest figures are estimates at the minimum payment.</p>
+          </div>
+
+          <!-- Annual Overview -->
+          <div class="tab-panel" role="tabpanel" id="panel-annual" aria-labelledby="tab-annual" hidden>
+            <div class="sheet-bar">
+              <span class="sheet-name">Annual Overview</span>
+              <span class="kv">Year <span class="cell-in">2026 &#9662;</span></span>
+            </div>
+            <div class="scroll framed">
+              <table class="sheet">
+                <caption class="sr-only">Income, expenses, left over and savings rate by month for 2026, example data</caption>
+                <thead><tr><th></th><th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th><th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th><th>Total</th></tr></thead>
+                <tbody>
+                  <tr><td>Income</td><td>6,850</td><td>6,850</td><td>6,850</td><td>6,850</td><td>6,850</td><td>6,850</td><td>6,850</td><td>6,850</td><td class="cur">6,850</td><td>6,850</td><td>6,850</td><td>6,850</td><td>82,200</td></tr>
+                  <tr><td>Expenses</td><td>3,920</td><td>3,610</td><td>3,780</td><td>3,450</td><td>3,990</td><td>4,080</td><td>3,720</td><td>3,540</td><td class="cur">3,610</td><td>3,880</td><td>3,960</td><td>4,100</td><td>45,640</td></tr>
+                  <tr><td>Left over</td><td>2,930</td><td>3,240</td><td>3,070</td><td>3,400</td><td>2,860</td><td>2,770</td><td>3,130</td><td>3,310</td><td class="cur">3,240</td><td>2,970</td><td>2,890</td><td>2,750</td><td>36,560</td></tr>
+                  <tr><td>Savings rate</td><td>43%</td><td>47%</td><td>45%</td><td>50%</td><td>42%</td><td>40%</td><td>46%</td><td>48%</td><td class="cur">47%</td><td>43%</td><td>42%</td><td>40%</td><td>44%</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="ann-chart" aria-hidden="true">
+              <div class="chart-head">
+                <h4>Income split by month</h4>
+                <div class="legend"><span><i class="e"></i>Expenses</span><span><i class="s"></i>Left over</span></div>
+              </div>
+              <div class="scroll">
+                <div class="ann-bars">
+                  <div class="m"><div class="s" style="height:41%"></div><div class="e" style="height:54%"></div></div>
+                  <div class="m"><div class="s" style="height:45%"></div><div class="e" style="height:50%"></div></div>
+                  <div class="m"><div class="s" style="height:42%"></div><div class="e" style="height:53%"></div></div>
+                  <div class="m"><div class="s" style="height:47%"></div><div class="e" style="height:48%"></div></div>
+                  <div class="m"><div class="s" style="height:40%"></div><div class="e" style="height:55%"></div></div>
+                  <div class="m"><div class="s" style="height:38%"></div><div class="e" style="height:57%"></div></div>
+                  <div class="m"><div class="s" style="height:43%"></div><div class="e" style="height:52%"></div></div>
+                  <div class="m"><div class="s" style="height:46%"></div><div class="e" style="height:49%"></div></div>
+                  <div class="m cur"><div class="s" style="height:45%"></div><div class="e" style="height:50%"></div></div>
+                  <div class="m"><div class="s" style="height:41%"></div><div class="e" style="height:54%"></div></div>
+                  <div class="m"><div class="s" style="height:40%"></div><div class="e" style="height:55%"></div></div>
+                  <div class="m"><div class="s" style="height:38%"></div><div class="e" style="height:57%"></div></div>
+                </div>
+                <div class="ann-labels"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></div>
+              </div>
+            </div>
+            <p class="sheet-note">The real tab also breaks every category out across the 12 months, so you can spot which ones drift over the year.</p>
           </div>
         </div>
+
+        <p class="legend-note"><span><i class="sw in"></i>You type here</span><span><i class="sw calc"></i>Calculated for you</span><span><i class="sw over"></i>Over plan</span></p>
       </div>
     </section>
 
     <!-- What's inside -->
-    <section id="inside" aria-labelledby="inside-heading">
+    <section id="tabs" class="tone" aria-labelledby="tabs-heading">
       <div class="wrap">
         <div class="section-head">
-          <span class="eyebrow">What's inside</span>
-          <h2 id="inside-heading">Nine tabs. One file. Everything connected.</h2>
+          <span class="eyebrow">Every tab</span>
+          <h2 id="tabs-heading">Ten tabs. One file. Everything connected.</h2>
           <p>Log a transaction once and every other tab updates on its own.</p>
         </div>
         <div class="grid grid-tabs">
-          <article class="card">
+          <article class="card compact">
             <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="11" width="8" height="10" rx="2"/><rect x="3" y="14" width="8" height="7" rx="2"/></svg></div>
             <h3>Dashboard</h3>
-            <p>Monthly income, spending, what's left, savings rate, top categories and a planned vs actual chart — all in one view.</p>
+            <p>Income, spending, what's left, savings rate, top categories and a planned vs actual chart.</p>
           </article>
-          <article class="card">
+          <article class="card compact">
             <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
             <h3>Monthly Budget</h3>
-            <p>Planned vs actual by category, auto-filled from your transactions. See the difference at a glance.</p>
+            <p>Planned vs actual by category, filled in from your transactions.</p>
           </article>
-          <article class="card">
+          <article class="card compact">
             <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
             <h3>Transactions log</h3>
-            <p>Date, description, amount and a dropdown category. Type it in and the math is done for you.</p>
+            <p>Date, description, amount and a dropdown category. 1,000 rows ready.</p>
           </article>
-          <article class="card">
+          <article class="card compact">
             <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="9"/></svg></div>
             <h3>Budget Plan</h3>
-            <p>12 months of targets. Set defaults once, then override any single month when life changes.</p>
+            <p>12 months of targets. Set defaults once, override any single month.</p>
           </article>
-          <article class="card">
+          <article class="card compact">
             <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M4 16l5-6 4 3 7-8"/></svg></div>
             <h3>Annual Overview</h3>
-            <p>Every category across 12 months plus a trend chart, so you can see the whole year on one screen.</p>
+            <p>Every category across 12 months plus a trend chart.</p>
           </article>
-          <article class="card">
+          <article class="card compact">
             <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
             <h3>Savings Goals</h3>
-            <p>Sinking funds with progress bars and the monthly amount needed to reach each goal by its date.</p>
+            <p>Sinking funds with progress bars and the monthly amount needed.</p>
           </article>
-          <article class="card">
+          <article class="card compact">
             <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-            <h3>Debt Payoff planner</h3>
-            <p>Choose snowball or avalanche order. See months to payoff and an interest estimate for each debt.</p>
+            <h3>Debt Payoff</h3>
+            <p>Snowball or avalanche order, months to payoff and an interest estimate.</p>
           </article>
-          <article class="card">
+          <article class="card compact">
             <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
-            <h3>Net Worth tracker</h3>
-            <p>Assets minus debts, 24 months side by side, with a chart that shows the direction over time.</p>
+            <h3>Net Worth</h3>
+            <p>Assets minus debts, 24 months side by side, with a chart.</p>
           </article>
-          <article class="card">
+          <article class="card compact">
+            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg></div>
+            <h3>Settings</h3>
+            <p>Your categories, currency and starting month. Change them here, dropdowns update everywhere.</p>
+          </article>
+          <article class="card compact">
             <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 0 2 2h13"/></svg></div>
-            <h3>Start Here guide</h3>
-            <p>A short walkthrough inside the file, plus a Quick Start PDF, so you're set up in about 10 minutes.</p>
+            <h3>Start Here</h3>
+            <p>A short walkthrough inside the file, plus the Quick Start PDF.</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- How it works -->
-    <section id="how" aria-labelledby="how-heading" style="background: var(--cream-2);">
+    <section id="how" aria-labelledby="how-heading">
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">How it works</span>
@@ -415,42 +658,130 @@ fbq('track', 'ViewContent', {content_name: 'Tidy Money Budget Dashboard', conten
     </section>
 
     <!-- Who it's for -->
-    <section id="who" aria-labelledby="who-heading">
+    <section id="who" class="tone" aria-labelledby="who-heading">
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">Who it's for</span>
           <h2 id="who-heading">Made for people who want it simple</h2>
         </div>
-        <div class="grid grid-3">
-          <article class="card">
-            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 7.1 18.2l.9-5.5-4-3.9L9.5 8z"/></svg></div>
-            <h3>You want simple and pretty</h3>
-            <p>A practical system that's pleasant to open. Clean layout, clear numbers, nothing you don't need.</p>
+        <div class="who-grid">
+          <figure class="who-photo">
+            <img src="img/couple.jpg" width="1200" height="1200" loading="lazy" decoding="async" alt="Two phones lying side by side on a table">
+            <figcaption>Share the Google Sheet once and both phones show the same numbers.</figcaption>
+          </figure>
+          <div class="who-cards">
+            <article class="card">
+              <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 7.1 18.2l.9-5.5-4-3.9L9.5 8z"/></svg></div>
+              <h3>You want simple and pretty</h3>
+              <p>A practical system that's pleasant to open. Clean layout, clear numbers, nothing you don't need.</p>
+            </article>
+            <article class="card">
+              <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M15.5 14.5c3 0 6 1.8 6 5.5"/></svg></div>
+              <h3>Couples who share one sheet</h3>
+              <p>One file in a shared Google Drive. Both of you log spending; both of you see the same dashboard.</p>
+            </article>
+            <article class="card">
+              <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M7 15h4"/></svg></div>
+              <h3>Tired of monthly app fees</h3>
+              <p>Pay once, keep the file. No subscription, no account, no bank connection required.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compare -->
+    <section id="compare" aria-labelledby="compare-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Spreadsheet vs. budgeting app</span>
+          <h2 id="compare-heading">How it compares</h2>
+          <p>A plain side-by-side. “Typical app” means the common subscription budgeting apps; details vary by product.</p>
+        </div>
+        <div class="card compare-card">
+          <div class="scroll">
+            <table class="compare">
+              <caption class="sr-only">Comparison of Tidy Money, a typical subscription app and a paper notebook</caption>
+              <thead>
+                <tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col" class="us">Tidy Money</th><th scope="col">Typical subscription app</th><th scope="col">Paper / notebook</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Price</th><td class="us">One-time $12</td><td>$8–$15 every month</td><td>Free</td></tr>
+                <tr><th scope="row">Your data</th><td class="us">In your own Google Drive or on your computer</td><td>On their servers</td><td>In a notebook</td></tr>
+                <tr><th scope="row">Bank linking</th><td class="us">Manual entry, about 5 minutes a week</td><td>Automatic</td><td>Manual</td></tr>
+                <tr><th scope="row">Customizable categories</th><td class="us">Yes, unlimited</td><td>Limited</td><td>Yes</td></tr>
+                <tr><th scope="row">Works offline</th><td class="us">Yes, in Excel</td><td>No</td><td>Yes</td></tr>
+                <tr><th scope="row">Shared with a partner</th><td class="us">Yes, share the Google Sheet</td><td>Usually a paid tier</td><td>No</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="compare-note">Tidy Money does not connect to your bank. If automatic imports matter most to you, an app is the better fit.</p>
+      </div>
+    </section>
+
+    <!-- What you get -->
+    <section id="files" class="tone" aria-labelledby="files-heading">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">What you get</span>
+          <h2 id="files-heading">Two files, delivered right after checkout</h2>
+        </div>
+        <div class="grid grid-2">
+          <article class="card file">
+            <div class="file-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8 12h8M8 15.5h8M8 19h8M12 12v7"/></svg>
+            </div>
+            <div>
+              <h3><code>Tidy-Money-Budget-Dashboard.xlsx</code></h3>
+              <div class="kind">Excel workbook · opens in Google Sheets and Excel</div>
+              <ul class="specs">
+                <li>10 tabs, all connected</li>
+                <li>1,000-row transaction log with dropdown categories</li>
+                <li>Conditional formatting that flags over-budget lines</li>
+                <li>3 charts: planned vs actual, annual trend, net worth</li>
+              </ul>
+            </div>
           </article>
-          <article class="card">
-            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M15.5 14.5c3 0 6 1.8 6 5.5"/></svg></div>
-            <h3>Couples who share one sheet</h3>
-            <p>One file in a shared Google Drive. Both of you log spending; both of you see the same dashboard.</p>
-          </article>
-          <article class="card">
-            <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M7 15h4"/></svg></div>
-            <h3>Tired of monthly app fees</h3>
-            <p>Pay once, keep the file. No subscription, no account, no bank connection required.</p>
+          <article class="card file">
+            <div class="file-icon pdf" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8 13h8M8 17h5"/></svg>
+            </div>
+            <div>
+              <h3><code>Tidy-Money-Quick-Start-Guide.pdf</code></h3>
+              <div class="kind">PDF guide · short and printable</div>
+              <ul class="specs">
+                <li>Set-up in 10 minutes, for Google Sheets and for Excel</li>
+                <li>A 5-minute weekly routine</li>
+                <li>FAQ and troubleshooting</li>
+              </ul>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- About -->
+    <section class="about" aria-labelledby="about-heading">
+      <div class="wrap">
+        <div class="about-card">
+          <span class="eyebrow">Who made this</span>
+          <h2 id="about-heading" style="font-size:1.35rem;">A small team, one spreadsheet</h2>
+          <p>We're a small independent team that wanted a budget we could keep in a plain spreadsheet — no app to install, no subscription, no bank login. Tidy Money is the file we built for ourselves, cleaned up and documented so anyone can use it. If you get stuck, reply to your receipt email and a person will answer.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Pricing -->
-    <section id="pricing" class="pricing" aria-labelledby="pricing-heading" style="background: var(--cream-2);">
+    <section id="pricing" class="pricing tone" aria-labelledby="pricing-heading">
       <div class="wrap">
         <div class="price-card">
-          <span class="eyebrow">Launch price</span>
+          <span class="eyebrow">Pricing</span>
           <h2 id="pricing-heading" style="font-size:1.35rem;">Tidy Money — Budget Dashboard</h2>
           <div class="price">$12 <small>one-time</small></div>
           <p class="muted" style="margin:0;">No subscription. Lifetime use.</p>
           <ul>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The Tidy Money .xlsx file — 9 connected tabs</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>The Tidy Money .xlsx file — 10 connected tabs</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Quick Start PDF for Google Sheets and Excel</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Works in Google Sheets, Excel 2016+ and Microsoft 365</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span>Editable categories and dropdowns</span></li>
@@ -519,7 +850,34 @@ fbq('track', 'ViewContent', {content_name: 'Tidy Money Budget Dashboard', conten
   </footer>
 
   <script>
-    var CHECKOUT_URL = "https://whop.com/mossso/tidy-money-budget-dashboard/";
+    (function () {
+      var tabs = document.querySelectorAll('.tab-btn');
+      var panels = document.querySelectorAll('.tab-panel');
+      function show(i) {
+        for (var j = 0; j < tabs.length; j++) {
+          var on = j === i;
+          tabs[j].setAttribute('aria-selected', on ? 'true' : 'false');
+          tabs[j].tabIndex = on ? 0 : -1;
+          panels[j].hidden = !on;
+        }
+      }
+      for (var i = 0; i < tabs.length; i++) {
+        (function (i) {
+          tabs[i].addEventListener('click', function () { show(i); });
+          tabs[i].addEventListener('keydown', function (e) {
+            var k = e.key;
+            if (k !== 'ArrowRight' && k !== 'ArrowLeft') { return; }
+            var n = (i + (k === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length;
+            show(n);
+            tabs[n].focus();
+            e.preventDefault();
+          });
+        })(i);
+      }
+    })();
+  </script>
+  <script>
+    var CHECKOUT_URL = "https://whop.com/001gomesgomes-cell/tidy-money-budget-dashboard/";
     (function () {
       var buttons = document.querySelectorAll('[data-checkout]');
       for (var i = 0; i < buttons.length; i++) {
